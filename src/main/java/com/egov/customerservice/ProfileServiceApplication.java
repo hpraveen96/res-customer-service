@@ -1,4 +1,4 @@
-package com.egov.profileservice;
+package com.egov.customerservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

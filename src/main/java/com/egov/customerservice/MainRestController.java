@@ -1,5 +1,4 @@
-package com.egov.profileservice;
-import com.egov.profileservice.Profile;
+package com.egov.customerservice;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,15 +12,15 @@ public class MainRestController {
     private static final Logger logger = LoggerFactory.getLogger(MainRestController.class);
 
     @Autowired
-    ProfileRepository profileRepository;
+    CustomerRepository customerRepository;
 
     @Autowired
     TokenService tokenService;
 
-    @PostMapping("save/profile")
-    public ResponseEntity<String> addProfile(@RequestHeader("Authorization") String token,
-                                             @RequestBody Profile profile) {
-        logger.info("Received parameter for profile"+ profile.toString());
+    @PostMapping("save/customer")
+    public ResponseEntity<String> addCustomer(@RequestHeader("Authorization") String token,
+                                             @RequestBody Customer customer) {
+        logger.info("Received parameter for customer"+ customer.toString());
         String phone;
         try {
             phone = tokenService.validateToken(token);
@@ -29,10 +28,10 @@ public class MainRestController {
             logger.info("Token validation failed: " + e.getMessage());
             return ResponseEntity.status(401).body("Invalid token");
         }
-        if(phone.equals(profile.getPhone())) {
-            logger.info("Phone Match, Saving Profile details");
-            profileRepository.save(profile);
-            return ResponseEntity.ok("Profile added Successfully");
+        if(phone.equals(customer.getPhone())) {
+            logger.info("Phone Match, Saving Customer details");
+            customerRepository.save(customer);
+            return ResponseEntity.ok("Customer added Successfully");
         }
 
         return ResponseEntity.status(401).body("Invalid Phone Number");

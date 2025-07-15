@@ -1,4 +1,4 @@
-package com.egov.profileservice;
+package com.egov.customerservice;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -7,8 +7,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Getter
 @Setter
-@Document(collection = "profiles")
-public class Profile {
+@Document(collection = "customers")
+public class Customer {
 
     @Id
     String phone;
